@@ -24,10 +24,12 @@ const CoordinatesForm = () => {
     if (response.code === 0) {
       dispatch({
         type: "GET_TEMPERATURE_SUCCESS",
+        payload: { descriptionMessage: `Successfully Add Temperature!` },
       });
     } else {
       dispatch({
         type: "GET_TEMPERATURE_FAILURE",
+        payload: { descriptionMessage: `Error Server!` },
       });
     }
   };
@@ -57,8 +59,8 @@ const CoordinatesForm = () => {
           rules={[{ required: true, message: "Please input your latitude!" }]}
         >
           <InputNumber
-            min={-89}
-            max={89}
+            min={-89.96}
+            max={89.96}
             step="0.01"
             onChange={onChangeLatitude}
             value={latitude}
@@ -73,8 +75,8 @@ const CoordinatesForm = () => {
           rules={[{ required: true, message: "Please input your longitude!" }]}
         >
           <InputNumber
-            min={-179}
-            max={179}
+            min={-178.95}
+            max={178.95}
             step="0.01"
             onChange={onChangeLongitude}
             value={longitude}

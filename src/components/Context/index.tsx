@@ -1,3 +1,4 @@
+import { IconType } from "antd/es/notification/interface";
 import {
   useReducer,
   useContext,
@@ -8,6 +9,8 @@ import {
 
 type TemperatureState = {
   isLoading: boolean;
+  message: IconType | "";
+  descriptionMessage: string;
 };
 type TemperatureAction =
   | {
@@ -15,13 +18,24 @@ type TemperatureAction =
     }
   | {
       type: "GET_TEMPERATURE_SUCCESS";
+      payload: { descriptionMessage: string };
     }
   | {
       type: "GET_TEMPERATURE_FAILURE";
+      payload: { descriptionMessage: string };
+    }
+  | {
+      type: "RESET_MESSAGE";
+    }
+  | {
+      type: "DELETE_TEMPERATURE_SUCCESS";
+      payload: { descriptionMessage: string };
     };
 
 const initialState: TemperatureState = {
   isLoading: false,
+  message: "",
+  descriptionMessage: "",
 };
 
 const TemperatureStateContext = createContext<TemperatureState>(initialState);
@@ -40,11 +54,27 @@ const reducer = (state: TemperatureState, action: TemperatureAction) => {
       return {
         ...state,
         isLoading: false,
+        message: "success",
+        descriptionMessage: action.payload.descriptionMessage,
       };
     case "GET_TEMPERATURE_FAILURE":
       return {
         ...state,
         isLoading: false,
+        message: "error",
+        descriptionMessage: action.payload.descriptionMessage,
+      };
+    case "RESET_MESSAGE":
+      return {
+        ...state,
+        message: "",
+        descriptionMessage: "",
+      };
+    case "DELETE_TEMPERATURE_SUCCESS":
+      return {
+        ...state,
+        message: "success",
+        descriptionMessage: action.payload.descriptionMessage,
       };
     default:
       throw new Error(`Unknown action: ${JSON.stringify(action)}`);

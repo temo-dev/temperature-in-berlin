@@ -8,7 +8,7 @@ export const getTemperature = async (latitude: number, longitude: number) => {
   try {
     await axios
       .get(
-        `https://api.open-meteo.com/v1/forecast?latitude=${valueLatitude}&longitude=${valueLongitude}&current_weather=true&current_weather=true&timezone=Europe%2FBerlin`
+        `https://api.open-meteo.com/v1/gem?latitude=${valueLatitude}&longitude=${valueLongitude}&current_weather=true&current_weather=true`
       )
       .then((res) => {
         const itemTemperature: DataTypeTemperatue = {

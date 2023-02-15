@@ -3,7 +3,7 @@ import { Button, Space, Table } from "antd";
 import style from "styled-components";
 import { DataTypeTemperatue } from "../../core/types";
 import Column from "antd/es/table/Column";
-import { useStateTemperature } from "../Context/index";
+import { useStateTemperature, useDispatchTemperature } from "../Context/index";
 import { getItemInLocal, setItemsInLocal } from "../../core/utils";
 import { useState } from "react";
 
@@ -12,6 +12,7 @@ const StyledListItems = style(Table)`
 
 const TableListItems = () => {
   const isLoading = useStateTemperature().isLoading;
+  const dispatch = useDispatchTemperature();
   const initialStateValue: DataTypeTemperatue[] = [];
   const [data, setData] = useState(initialStateValue);
 
@@ -27,12 +28,20 @@ const TableListItems = () => {
     const newDataListItem = data.filter((item) => item.key !== value);
     setItemsInLocal("temperature", newDataListItem);
     setData(newDataListItem);
+    dispatch({
+      type: "DELETE_TEMPERATURE_SUCCESS",
+      payload: { descriptionMessage: `Successfully Delete Temperature!` },
+    });
   };
 
   const onDeleteAll = () => {
     const newData: DataTypeTemperatue[] = [];
     setItemsInLocal("temperature", newData);
     setData(newData);
+    dispatch({
+      type: "DELETE_TEMPERATURE_SUCCESS",
+      payload: { descriptionMessage: `Successfully Delete Temperatures!` },
+    });
   };
 
   return (
@@ -61,13 +70,9 @@ const TableListItems = () => {
             </span>
           )}
         />
-        <Column title="Reality Latitude" dataIndex="latitude" key="latitude" />
-        <Column
-          title="Reality Longitude"
-          dataIndex="longitude"
-          key="longitude"
-        />
-        <Column title="TimeZone" dataIndex="timezone" key="timezone" />
+        <Column title="Latitude" dataIndex="latitude" key="latitude" />
+        <Column title="Longitude" dataIndex="longitude" key="longitude" />
+        {/* <Column title="TimeZone" dataIndex="timezone" key="timezone" /> */}
         <Column
           title="Action"
           key="action"
