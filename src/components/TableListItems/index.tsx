@@ -8,6 +8,7 @@ import { getItemInLocal, setItemsInLocal } from "../../core/utils";
 import { useState } from "react";
 
 const StyledListItems = style(Table)`
+margin-top: 10px;
 `;
 
 const TableListItems = () => {
@@ -59,6 +60,7 @@ const TableListItems = () => {
         bordered
         pagination={false}
         scroll={{ y: 240 }}
+        size="small"
       >
         <Column
           title="Temperature"
@@ -72,7 +74,6 @@ const TableListItems = () => {
         />
         <Column title="Latitude" dataIndex="latitude" key="latitude" />
         <Column title="Longitude" dataIndex="longitude" key="longitude" />
-        {/* <Column title="TimeZone" dataIndex="timezone" key="timezone" /> */}
         <Column
           title="Action"
           key="action"

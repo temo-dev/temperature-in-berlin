@@ -72,7 +72,7 @@ function App() {
     <>
       <Context.Provider value={contextValue}>
         {contextHolder}
-        <h3>Temperature with Coordinates</h3>
+        <h3>Temperature with Coordinates - TimeZone: Berlin</h3>
         <StyledApp>
           {isLoading ? <StyledLoading indicator={loadingIcon} /> : null}
           <StyledContainer gutter={16} justify="space-evenly">
