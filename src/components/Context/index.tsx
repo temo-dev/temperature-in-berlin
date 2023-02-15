@@ -5,6 +5,7 @@ import {
   createContext,
   ReactNode,
   Dispatch,
+  Reducer,
 } from "react";
 
 type TemperatureState = {
@@ -43,7 +44,10 @@ const TemperatureDispatchContext = createContext<Dispatch<TemperatureAction>>(
   () => null
 );
 
-const reducer = (state: TemperatureState, action: TemperatureAction) => {
+const reducer: Reducer<TemperatureState, TemperatureAction> = (
+  state: TemperatureState,
+  action: TemperatureAction
+) => {
   switch (action.type) {
     case "GET_TEMPERATURE":
       return {
